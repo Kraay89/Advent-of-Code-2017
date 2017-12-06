@@ -1,14 +1,12 @@
 ########################
 #### Initialisation ####
 ########################
-import sys
 
 input_ex1 = []
 with open("inputs/day5_1.txt") as inputfile:
     for line in inputfile.readlines():
         input_ex1.append(int(line.strip()))
 
-sys.setrecursionlimit(3000)
 
 ########################
 ####    Part one    ####
@@ -45,12 +43,12 @@ steps = 0
 while True:
     try:
         instruction = input_data[newIndex]
-        if instruction >= 3:
-            input_data[newIndex] -= 1
-        else:
-            input_data[newIndex] += 1
-        newIndex += instruction
-        steps += 1
     except IndexError:
         print("It takes {} steps to escape this list of instructions".format(steps))
         break
+    if instruction >= 3:
+        input_data[newIndex] -= 1
+    else:
+        input_data[newIndex] += 1
+    newIndex += instruction
+    steps += 1
