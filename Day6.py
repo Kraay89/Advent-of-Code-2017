@@ -37,11 +37,11 @@ while not new_input in found_distributions:
     steps += 1
 print("It takes {} cycles to enter an infinite loop.".format(steps))
 
-length_of_loop = len(found_distributions) - \
-    found_distributions.index(new_input)
-print("The infinite loop contains {} steps".format(length_of_loop))
-
 
 ########################
 ####    Part two    ####
 ########################
+
+length_of_loop = len(found_distributions) - \
+    found_distributions.index(new_input)
+print("The infinite loop contains {} steps".format(length_of_loop))

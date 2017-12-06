@@ -78,3 +78,50 @@ while True:
 ########################
 ####    Part two    ####
 ########################
+
+
+def expandGrid(grid):
+    # Rethink the probem: I turn the grid 90 degrees counter clockwise
+    # and add an extra row of zero's to what is now the bottom,
+    # but is essentially a new part of the spiral.
+    grid = zip(*grid[::-1])
+    grid = [list(i) for i in list(grid)]
+
+    return grid + [[0] * len(grid[0])]
+
+
+def fillSpiral(grid):
+    # Find zeros in the current and replace them with the sum of their non-zero neighbours
+    while 0 in grid[-1]:
+        index = grid[-1].index(0)
+        try:
+            grid[-1][index] += grid[-2][index]
+        except:
+            pass
+        try:
+            grid[-1][index] += grid[-2][index + 1]
+        except:
+            pass
+        if index > 0:
+            try:
+                grid[-1][index] += grid[-2][index - 1]
+            except:
+                pass
+            try:
+                grid[-1][index] += grid[-1][index - 1]
+            except:
+                pass
+    return grid
+
+
+grid = [[1]]
+while True:
+    grid = expandGrid(grid)
+    grid = fillSpiral(grid)
+
+    if max(grid[-1]) > input_ex1:
+        print("The first value in this spiral to exceed the input of exercise 1 is {}.".format(
+            list(filter(lambda x: x > input_ex1, grid[-1]))[0]))
+        for row in grid:
+            print(row)
+        break
